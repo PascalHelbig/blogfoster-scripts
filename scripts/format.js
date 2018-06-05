@@ -27,14 +27,13 @@ const prettierArgs = [
 const result = spawnSync(paths.projectPrettier, prettierArgs, {
   env: process.env,
   cwd: paths.projectRoot,
-  stdio: 'inherit',
 });
 
-if (result.error) {
-  console.error('Command failed with the following error:\n');
-  console.error(result.error);
-
-  process.exit(1);
+if (result.status !== 0) {
+  console.error('Command failed with the following error:');
+  result.output.forEach(
+    chunck => chunck && console.error(chunck.toString('utf8'))
+  );
 }
 
 process.exit(result.status);
