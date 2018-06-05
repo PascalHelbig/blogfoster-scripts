@@ -10,7 +10,7 @@ const subcommandOrFirstTarget = args._[1];
 const hasTarget = subcommandOrFirstTarget !== 'format';
 const targetArgs = args._.slice(1);
 const targets =
-  hasTarget && targetArgs.length > 1 ? args._.slice(1) : `**/*.{js,json,md}`;
+  hasTarget && targetArgs.length > 0 ? targetArgs : `**/*.{js,json,md}`;
 const hasIgnoreOverride = existsSync(paths.projectPrettierIgnore);
 const ignorePath = hasIgnoreOverride
   ? paths.projectPrettierIgnore
